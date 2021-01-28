@@ -46,6 +46,15 @@ export default new Vuex.Store({
       const movies = response.data;
       context.commit("fillMovies", movies);
     },
+    //envoi des films sur l'API
+    sendToAPI (data) {
+      const movie = {
+        name: data.title, 
+        year: parseInt(data.year), 
+        url: data.image 
+        };
+      axios.post('https://movies-api.alexgalinier.now.sh/', movie);  
+    }
   },
     // les mutations modifient le state avec des fonctions
     //(toujours mettre le state en arg)

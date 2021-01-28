@@ -17,20 +17,22 @@
 <script>
 import Layout from '../components/Layout'
 import Form from '../components/Form'
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name:'AddMovie',
   components: { Layout, Form },
   data () {
     return{
-      errors : []
+      errors : [],
     }
   },
   methods: {
-      checkForm : function(data){
+     checkForm : async function(data){
         if (data.title && data.year) {
-         this.sendToAPI(data);
+         await this.sendToAPI(data);
+         alert('Film ajouté !');
+         this.$router.push("/");
         }
         this.errors = [];
         if (!data.title) {
@@ -41,18 +43,9 @@ export default {
         }
        
       },
-    async sendToAPI (data) {
-      const movie = {
-        name: data.title, 
-        year: parseInt(data.year), 
-        url: data.image 
-        };
-      await axios.post('https://movies-api.alexgalinier.now.sh/', movie);
-      alert('Film ajouté !');
-      this.$router.push("/")
-      return
-    }
-  }
+    ...mapActions(['sendToAPI'])
+    },
+  
 }
 </script>
 
