@@ -2,10 +2,10 @@
   <div>
     <Layout title="Liste des films">
       <template #content>
-        <input type="text" v-model="search" placeholder="Rechercher un film...">
+        <input type="text" v-model="string" placeholder="Rechercher un film...">
         <p v-if="getMovies.length == 0">Chargement ...</p>
         <router-link 
-          v-else v-for="movie in getSearchedMovie" 
+          v-else v-for="movie in getFilteredMovies(string)" 
           :key="movie.id" 
           :to="`/movie/${movie.id}`">
           <MovieCard>
@@ -22,7 +22,7 @@
 <script>
 import MovieCard from '../components/MovieCard';
 import Layout from '../components/Layout';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Movies',
@@ -30,21 +30,14 @@ export default {
 
   data() {
     return {
-      search: "",
+      string: "",
     }
   },
 
   computed: {
-      getSearchedMovie () {
-        let movies = this.getMovies;
-        let searchedMovie = this.search.toLowerCase();
-        let filterMovie = movie => movie.name.toLowerCase().includes(searchedMovie)
-        return movies.filter(filterMovie)
-      },
-      ...mapGetters(['getMovies']),
-    },
-    
-  };
+      ...mapGetters(['getMovies', 'getFilteredMovies']),
+  },
+};
 
 </script>
 
