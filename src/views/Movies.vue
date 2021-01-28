@@ -3,7 +3,7 @@
     <Layout title="Liste des films">
       <template #content>
         <input type="text" v-model="search" placeholder="Rechercher un film...">
-        <p v-if="movies.length == 0">Chargement ...</p>
+        <p v-if="getMovies.length == 0">Chargement ...</p>
         <router-link 
           v-else v-for="movie in getSearchedMovie" 
           :key="movie.id" 
@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import axios from 'axios';
 import MovieCard from '../components/MovieCard';
 import Layout from '../components/Layout';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Movies',
@@ -30,23 +30,20 @@ export default {
 
   data() {
     return {
-      movies: [],
       search: "",
     }
   },
 
-  mounted () {
-    axios.get('https://movies-api.alexgalinier.now.sh/').then(response => (this.movies = response.data))
-  },
-
   computed: {
       getSearchedMovie () {
-        let movies = this.movies;
+        let movies = this.getMovies;
         let searchedMovie = this.search.toLowerCase();
         let filterMovie = movie => movie.name.toLowerCase().includes(searchedMovie)
         return movies.filter(filterMovie)
-      }
-    }
+      },
+      ...mapGetters(['getMovies']),
+    },
+    
   };
 
 </script>
