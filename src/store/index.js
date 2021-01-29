@@ -32,8 +32,8 @@ export default new Vuex.Store({
     getFilteredMovies: (state) => (string) => {
       return state.movies.filter((movie) => movie.name.match(string));
     },
-    getMovieById: (state, id) => {
-      return state + id; // return le bon film à coder
+    getMovieById: (state) => (id) => {
+      return state.movies.find((movie) => movie.id === id);
     },
   },
   // actions asynchrone souvent appel à l'api + application d'une mutation avec context.commit
@@ -47,13 +47,14 @@ export default new Vuex.Store({
       context.commit("fillMovies", movies);
     },
     //envoi des films sur l'API
-    sendToAPI ( context, data) {
+    sendToAPI (context, data) {
       const movie = {
-        name: data.title, 
+        name: data.title,
         year: parseInt(data.year),
         url: data.image
         };
       axios.post('https://movies-api.alexgalinier.now.sh/', movie);  
+
     }
   },
     // les mutations modifient le state avec des fonctions
