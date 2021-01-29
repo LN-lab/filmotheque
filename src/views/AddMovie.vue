@@ -6,10 +6,7 @@
             <li v-for="error in errors" :key="error">{{error}}</li>
         </ul>
         </p>
-          <Form 
-          @form-submitted="checkForm">     
-          
-          </Form>
+          <Form @form-submitted="checkForm"></Form>
       </template>
  </Layout>
 </template>

@@ -47,11 +47,11 @@ export default new Vuex.Store({
       context.commit("fillMovies", movies);
     },
     //envoi des films sur l'API
-    sendToAPI (data) {
+    sendToAPI ( context, data) {
       const movie = {
         name: data.title, 
-        year: parseInt(data.year), 
-        url: data.image 
+        year: parseInt(data.year),
+        url: data.image
         };
       axios.post('https://movies-api.alexgalinier.now.sh/', movie);  
     }
