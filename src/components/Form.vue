@@ -2,22 +2,19 @@
   <div>
       <InputWithError 
         label="Titre" 
-        name="title"
         :value="titleValue"
-        @input="getMovieData( $event, 'title')" />
+        @input="getMovieDataFromInput( $event, 'title')" />
         <!--j'ecoute 'input-value' du composant-fils InputWithError / je me sers de la fonction getMovieData pour récupérer la data grâce à l'$event que je mets dans 'title'-->
     
       <InputWithError
         label="Année" 
-        name="year"
         :value="yearValue"
-        @input="getMovieData( $event, 'year' )" />
+        @input="getMovieDataFromInput( $event, 'year' )" />
     
       <InputWithError
         label="Image" 
-        name="imageURL"
         :value="imageValue"
-        @input="getMovieData( $event, 'image' )" />
+        @input="getMovieDataFromInput( $event, 'image' )" />
 
       <button
         @click="$emit( 'form-submitted', newMovie )" type="submit">
@@ -57,13 +54,16 @@ export default {
       type: String,
       default:"",
     }
-
   },
     methods:{
-      getMovieData(event, data){
+      getMovieDataFromInput(event, data){
         this.newMovie[data] = event;
       },
-    
+    },
+    mounted() {
+      this.newMovie.title = this.titleValue;
+      this.newMovie.year = this.yearValue;
+      this.newMovie.image = this.imageValue;
     }
   }
 
