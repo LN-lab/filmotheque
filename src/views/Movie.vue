@@ -9,7 +9,12 @@
       <p> Je l'ai trouvé! : </p>
       <p> {{getMovieById($route.params.id).name}}</p>
       <p>Veuillez remplir ces champs pour le modifier:</p>
-    <Form/>
+    <Form
+      :titleValue="getMovieById($route.params.id).name"
+      :yearValue="getMovieById($route.params.id).year"
+      :imageValue="getMovieById($route.params.id).url"
+    ></Form>
+
   </div>
 </template>
 
