@@ -1,17 +1,10 @@
 <template>
-  <div>
-    <div class="movieContainer">
-      <div class="movieImage">
-        <slot name="Image"></slot>
-      </div>
-      <div class="movieInfo">
-        <div class="movieTitle">
-          <slot name="Title"></slot>
-        </div>
-        <div class="movieDate">
-          <slot name="Date"></slot>
-        </div>
-      </div>
+  <div class="movieInfo">
+    <div class="title">
+      <slot name="Title"></slot>
+    </div>
+    <div class="date">
+      <slot name="Date"></slot>
     </div>
   </div>
 </template>
@@ -22,26 +15,33 @@ export default {
 };
 </script>
 
-<style>
-.movieContainer {
-  width: 380px;
-  border-radius: 20px;
-  padding: 10px;
-  background: #353d6d;
-  box-shadow: 0 7px 00 rgba(0, 0, 0, 0.2);
-}
-.movieImage {
-  border-radius: 15px;
-  height: 300px;
-  width: 100%;
-  background-position: 50%;
-  background-size: cover;
-}
+<style scoped>
 .movieInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 15px;
-  color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.title{
+    font-family: Alfa Slab One,cursive;
+    font-size: 22px;
+    line-height: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+}
+.date{
+    font-size: 20px;
+    line-height: 22px;
+    color: hsla(0,0%,100%,.4);
+    margin-left: 10px;
 }
 </style>
