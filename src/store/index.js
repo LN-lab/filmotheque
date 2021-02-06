@@ -30,7 +30,7 @@ export default new Vuex.Store({
       return state.movies.sort();// return les films ordonnés a coder
     },
     getFilteredMovies: (state) => (string) => {
-      return state.movies.filter((movie) => movie.name.match(string));
+      return state.movies.filter((movie) => movie.name.toLowerCase().match(string.toLowerCase()));
     },
     getMovieById: (state) => (id) => {
       return state.movies.find((movie) => movie.id === id);
