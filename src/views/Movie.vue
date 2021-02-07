@@ -1,5 +1,5 @@
 <template>
-  <Layout title="Modifier le film">
+  <Layout title="Fiche du film">
    <template #content >
      <div class="container">
   

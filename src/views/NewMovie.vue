@@ -1,12 +1,17 @@
 <template>
  <Layout title="Ajout d'un film">
       <template #content>
+        <div class="container">
+    
         <p v-if="errors.length">
           <ul>
             <li v-for="error in errors" :key="error">{{error}}</li>
         </ul>
         </p>
-          <Form @form-submitted="checkForm"></Form>
+          <Form @form-submitted="checkForm">
+ 
+          </Form>
+        </div>
       </template>
  </Layout>
 </template>
