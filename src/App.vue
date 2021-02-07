@@ -64,9 +64,11 @@ ol[class] {
 }
 
 /* A elements that don't have a class get default styles */
-a:not([class]) {
+a:not([class]){
   text-decoration-skip-ink: auto;
 }
+
+
 
 /* Make images easier to work with */
 img {

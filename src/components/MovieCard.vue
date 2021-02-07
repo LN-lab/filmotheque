@@ -28,6 +28,7 @@ export default {
     justify-content: space-between;
     margin-top: 15px;
     margin-bottom: 5px;
+    
 }
 .title{
     font-family: Alfa Slab One,cursive;
@@ -43,5 +44,8 @@ export default {
     line-height: 22px;
     color: hsla(0,0%,100%,.4);
     margin-left: 10px;
+}
+a{
+  text-decoration: none;
 }
 </style>

@@ -37,4 +37,9 @@ export default {
 </script>
 
 <style>
+input{
+  width: 400px;
+  border-radius: 15px;
+  padding: 10px;
+}
 </style>

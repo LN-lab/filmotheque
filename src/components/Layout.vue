@@ -3,7 +3,9 @@
     <Header>
       <template #title>{{title}}</template>
     </Header>
-    <div class="content"><slot name="content"></slot></div>
+    <div class="content">
+      <slot name="content"></slot>
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,7 @@ export default {
     width: 100%;
     margin: 0 auto;
     background: linear-gradient(160deg,#2c3159,#161a33);
+
 }
 .content{
     width:1200px;

@@ -1,18 +1,14 @@
 <template>
-  <div>
-   
-      <p> L'id du film choisi est {{$route.params.id}}</p>
+  <Layout title="Modifier le film">
+   <template #content >
+     <div class="container">
+  
+      <h2> {{getMovieById($route.params.id).name}}</h2>
 
-      <p> Je le cherche parmis tous ces films: </p>
-      <p v-for="movie in getMovies" :key="movie.id">{{movie.name}}</p>
-
-      <p> Je l'ai trouvé! : </p>
-      <p> {{getMovieById($route.params.id).name}}</p>
-      <p>Veuillez remplir ces champs pour le modifier:</p>
-      <p v-if="errors.length">
+        <p v-if="errors.length">
           <ul>
             <li v-for="error in errors" :key="error">{{error}}</li>
-        </ul>
+          </ul>
         </p>
     <Form
       :titleValue="getMovieById($route.params.id).name"
@@ -20,56 +16,67 @@
       :imageValue="getMovieById($route.params.id).url"
       @form-submitted="checkForm"
     ></Form>
+    </div>
 
-  </div>
+   </template>
+  </Layout>
 </template>
 
 <script>
-import Form from '../components/Form.vue';
-import { mapActions, mapGetters } from 'vuex';
+import Form from "../components/Form.vue";
+import { mapActions, mapGetters } from "vuex";
+import Layout from "../components/Layout.vue";
 
 export default {
+  name: "Movie",
 
-  name:'Movie',
-
-  data (){
-    return{
+  data() {
+    return {
       errors: [],
-    }
+    };
   },
 
-  components: { Form },
+  components: { Layout, Form },
 
-
-  computed: { 
-    ...mapGetters(['getMovies', 'getMovieById']),
+  computed: {
+    ...mapGetters(["getMovies", "getMovieById"]),
   },
 
   methods: {
-     checkForm : async function(data){
-        if (data.title && data.year) {
-         await this.sendToAPI(data); // methode pour modifier devrait être put mais ne fonctionne pas avec cette API, du coup on crée un nouveau film
-         alert('Film modifié !');
-         this.$router.push("/");
-        }
-        this.errors = [];
-        if (!data.title) {
-          this.errors.push('Veuillez renseigner un titre');
-        }
-        if (!data.year) {
-          this.errors.push('Veuillez renseigner une année');
-        }
-        if (!data.image) {
-          this.errors.push('Veuillez renseigner une url');
-        }
-     },
-      ...mapActions(['sendToAPI'])
+    checkForm: async function (data) {
+      if (data.title && data.year) {
+        await this.sendToAPI(data); // methode pour modifier devrait être put mais ne fonctionne pas avec cette API, du coup on crée un nouveau film
+        alert("Film modifié !");
+        this.$router.push("/");
+      }
+      this.errors = [];
+      if (!data.title) {
+        this.errors.push("Veuillez renseigner un titre");
+      }
+      if (!data.year) {
+        this.errors.push("Veuillez renseigner une année");
+      }
+      if (!data.image) {
+        this.errors.push("Veuillez renseigner une url");
+      }
+    },
+    ...mapActions(["sendToAPI"]),
   },
-
-
 };
 </script>
 
 <style>
+.container {
+  background: #bbb;
+  display: flex;
+  flex-direction: column;
+  border: solid 3px hsla(0, 0%, 100%, 0.7);;
+  border-radius: 20px;
+}
+h2 {
+  margin-top: 15px;
+  text-align: center;
+}
+
 
 </style>

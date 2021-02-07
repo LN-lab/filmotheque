@@ -17,7 +17,7 @@ import Form from '../components/Form'
 import { mapActions } from 'vuex'
 
 export default {
-  name:'AddMovie',
+  name:'NewMovie',
   components: { Layout, Form },
   data () {
     return{

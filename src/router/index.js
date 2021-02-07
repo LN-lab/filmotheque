@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Movies from "../views/Movies.vue";
-import AddMovie from "../views/AddMovie.vue";
+import NewMovie from "../views/NewMovie.vue";
 import Movie from "../views/Movie.vue";
 
 Vue.use(VueRouter);
@@ -18,9 +18,9 @@ const routes = [
     component: Movie,
   },
   {
-    path: "/nouveau-film",
-    name: "AddMovie",
-    component: AddMovie,
+    path: "/new-movie",
+    name: "NewMovie",
+    component: NewMovie,
   },
 
 ];

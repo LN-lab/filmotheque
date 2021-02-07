@@ -1,14 +1,24 @@
 <template>
   <div id="movies">
-    <Layout title="Liste des films">
+    <Layout title="Mes films">
       <template #content>
-        <div class="search">
-          <input
-            type="text"
-            v-model="string"
-            placeholder="Rechercher un film..."
-          />
+        <div class="nav">
+          <div class="search">
+            <input
+              type="text"
+              v-model="string"
+              placeholder="Rechercher un film..."
+            />
+          </div>
+          <div class="sort">
+<select name="" id=""></select>
+          </div>
+
+          <div class="newMovie">
+            <router-link to="new-movie">Ajouter un film</router-link>
+          </div>
         </div>
+
         <div class="wallpaper">
           <p id="loading" v-if="getMovies.length == 0">Chargement ...</p>
           <router-link
@@ -20,13 +30,12 @@
             <div class="movie">
               <div
                 class="image"
-                :style="{ backgroundImage: `url(${movie.url})` }">
-                </div>
-                <MovieCard>
-                  <template #Title> {{ movie.name }} </template>
-                  <template #Date> {{ movie.year }} </template>
-                </MovieCard>
-              
+                :style="{ backgroundImage: `url(${movie.url})` }"
+              ></div>
+              <MovieCard>
+                <template #Title> {{ movie.name }} </template>
+                <template #Date> {{ movie.year }} </template>
+              </MovieCard>
             </div>
           </router-link>
         </div>
@@ -40,34 +49,67 @@ import MovieCard from "../components/MovieCard";
 import Layout from "../components/Layout";
 import { mapGetters } from "vuex";
 
+
 export default {
   name: "Movies",
-  components: { MovieCard, Layout },
+  components: { MovieCard, Layout,},
 
   data() {
     return {
       string: "",
+      option:"",
+      config: {
+        options: [
+        {
+          value: "Par année"
+        },
+        { 
+          value: "par genre"
+        },
+        {
+          value: "par age"
+        },
+        ],
+        placeholder: "trier",
+        backgroundColor: "#353d6d",
+        width: 300,
+        textColor:"gray" ,
+       
+      
+      },
+      
     };
   },
 
   computed: {
     ...mapGetters(["getMovies", "getFilteredMovies"]),
   },
+ 
 };
 </script>
 
 <style scoped>
-
-#movies{
-  width: 100%;
-
+a:-webkit-any-link {
+  text-decoration: none;
+  color: hsla(0, 0%, 100%, 0.7);
 }
-.search {
+#movies {
+  width: 100%;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
   margin: 30px 0;
 }
-
-.search input {
-  width: 100%;
+.search {
+  width: 30%;
+}
+.filter {
+  width: 30%;
+}
+.search input,
+.newMovie,
+.filter input {
   padding: 0 20px;
   border-radius: 20px;
   border: 4px solid #353d6d;
@@ -77,6 +119,13 @@ export default {
   background: rgba(0, 0, 0, 0.2);
   color: hsla(0, 0%, 100%, 0.7);
   font-size: 16px;
+}
+
+.newMovie {
+  background: #353d6d;
+  text-align: center;
+  padding-top: 10px;
+  width: 30%;
 }
 .wallpaper {
   width: 100%;
