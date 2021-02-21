@@ -6,12 +6,9 @@
           <div class="search">
             <input
               type="text"
-              v-model="string"
+              v-model="inputString"
               placeholder="Rechercher un film..."
             />
-          </div>
-          <div class="sort">
-<select name="" id=""></select>
           </div>
 
           <div class="newMovie">
@@ -20,18 +17,33 @@
         </div>
 
         <div class="wallpaper">
-          <p id="loading" v-if="getMovies.length == 0">Chargement ...</p>
-          <router-link
+          <p id="loading" 
+            v-if="getMovies.length == 0">Chargement ...
+          </p>
+          <router-link :to="`/movie/${movie.id}`"
+            v-else-if="inputString.length == 0"
+       
+              v-for="movie in getSortedMovies()" :key="movie.id">
+
+               <!-- display movies -->
+              <div class="movie">
+                <div class="image" :style="{ backgroundImage: `url(${movie.url})` }"></div>
+                <MovieCard>
+                  <template #Title> {{ movie.name }} </template>
+                  <template #Date> {{ movie.year }} </template>
+                </MovieCard>
+              </div>
+          </router-link> 
+         
+          <router-link :to="`/movie/${movie.id}`"
             v-else
-            v-for="movie in getFilteredMovies(string)"
-            :key="movie.id"
-            :to="`/movie/${movie.id}`"
-          >
-            <div class="movie">
-              <div
-                class="image"
-                :style="{ backgroundImage: `url(${movie.url})` }"
-              ></div>
+              v-for="movie in getFilteredMovies(inputString)" :key="movie.id">
+          <!-- display movies -->
+              <div class="movie">
+                <div
+                  class="image"
+                  :style="{ backgroundImage: `url(${movie.url})` }">
+                </div>
               <MovieCard>
                 <template #Title> {{ movie.name }} </template>
                 <template #Date> {{ movie.year }} </template>
@@ -47,7 +59,7 @@
 <script>
 import MovieCard from "../components/MovieCard";
 import Layout from "../components/Layout";
-import { mapGetters } from "vuex";
+import { mapGetters,  } from "vuex";
 
 
 export default {
@@ -56,33 +68,14 @@ export default {
 
   data() {
     return {
-      string: "",
-      option:"",
-      config: {
-        options: [
-        {
-          value: "Par année"
-        },
-        { 
-          value: "par genre"
-        },
-        {
-          value: "par age"
-        },
-        ],
-        placeholder: "trier",
-        backgroundColor: "#353d6d",
-        width: 300,
-        textColor:"gray" ,
-       
-      
-      },
-      
+      inputString: "",
+      value: "",
+      option:"",     
     };
   },
 
   computed: {
-    ...mapGetters(["getMovies", "getFilteredMovies"]),
+    ...mapGetters(["getMovies", "getFilteredMovies", "getSortedMovies"]),
   },
  
 };
@@ -102,31 +95,44 @@ a:-webkit-any-link {
   margin: 30px 0;
 }
 .search {
-  width: 30%;
+  width: 83%;
 }
-.filter {
-  width: 30%;
+.search ::placeholder{
+  color:#c3c3c7
 }
 .search input,
-.newMovie,
-.filter input {
+.newMovie{
   padding: 0 20px;
   border-radius: 20px;
   border: 4px solid #353d6d;
-  -webkit-box-shadow: 0 7px 0 0 rgb(0 0 0 / 20%);
-  box-shadow: 0 7px 0 0 rgb(0 0 0 / 20%);
+  -webkit-box-shadow: 0 4px 0 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 4px 0 0 rgb(0 0 0 / 20%);
   height: 56px;
   background: rgba(0, 0, 0, 0.2);
   color: hsla(0, 0%, 100%, 0.7);
   font-size: 16px;
+  width: 100%
 }
 
 .newMovie {
   background: #353d6d;
   text-align: center;
   padding-top: 10px;
-  width: 30%;
+  width: 15%;
 }
+.newMovie a{
+  color:aliceblue;
+  font-size: 1.2rem;
+}
+.newMovie a{
+  color:aliceblue;
+  font-size: 1.2rem;
+}
+a:hover{
+  color:cornflowerblue
+  
+}
+
 .wallpaper {
   width: 100%;
   display: grid;
@@ -138,8 +144,8 @@ a:-webkit-any-link {
   border-radius: 20px;
   padding: 10px;
   background: #353d6d;
-  -webkit-box-shadow: 0 7px 0 0 rgb(0 0 0 / 20%);
-  box-shadow: 0 7px 0 0 rgb(0 0 0 / 20%);
+  -webkit-box-shadow: 0 4px 0 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 4px 0 0 rgb(0 0 0 / 20%);
 }
 .image {
   border-radius: 15px;

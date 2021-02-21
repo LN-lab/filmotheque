@@ -15,17 +15,20 @@
           @input="getMovieDataFromInput($event, 'year')"
         />
         <button @click="$emit('form-submitted', newMovie)" type="submit">
-      Valider
-    </button>
+          Valider
+        </button>
       </div>
       <div class="image-container">
         <InputWithError
+        
           label="Image"
           :value="imageValue"
           @input="getMovieDataFromInput($event, 'image')"
+          
         />
+    
+        <img  class=image :src="imageValue" alt="image du film" />
 
-        <img class=image :src="imageValue" alt="image du film" />
       </div>
     </div>
     
@@ -89,7 +92,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 50px;
 }
 
 button{
@@ -113,7 +116,8 @@ button:hover{
 .image-container{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-top: 50px;
   
 }
 .image {
@@ -123,5 +127,6 @@ button:hover{
   max-height: 300px;
   border: 10px solid #2c3159;
   border-radius: 10px;
+  margin-bottom: 50px;
 }
 </style>

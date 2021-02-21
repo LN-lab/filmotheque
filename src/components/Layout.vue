@@ -29,7 +29,7 @@ export default {
 .layout {
     width: 100%;
     margin: 0 auto;
-    background: linear-gradient(160deg,#2c3159,#161a33);
+    background: linear-gradient(160deg,#2c3159,#d4d6e1);
 
 }
 .content{
@@ -37,5 +37,6 @@ export default {
     height: 100vh;
     margin: auto;
     overflow: auto;
+    padding-bottom: 50px;
 }
 </style>

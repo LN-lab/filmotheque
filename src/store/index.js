@@ -26,11 +26,22 @@ export default new Vuex.Store({
     getMovies(state) {
       return state.movies;
     },
-    getSortedMovies: (state) => {
-      return state.movies.sort();// return les films ordonnés a coder
+    getSortedMovies: (state) => (a, b) => {
+      return state.movies.sort((a, b) => {
+        const fa = a.name.toLowerCase()
+        const fb = b.name.toLowerCase()
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      })
     },
-    getFilteredMovies: (state) => (string) => {
-      return state.movies.filter((movie) => movie.name.toLowerCase().match(string.toLowerCase()));
+
+    getFilteredMovies: (state) => (inputString) => {
+      return state.movies.filter((movie) => movie.name.toLowerCase().match(inputString.toLowerCase()));
     },
     getMovieById: (state) => (id) => {
       return state.movies.find((movie) => movie.id === id);

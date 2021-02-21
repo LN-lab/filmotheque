@@ -72,6 +72,7 @@ export default {
   flex-direction: column;
   border: solid 3px hsla(0, 0%, 100%, 0.7);;
   border-radius: 20px;
+  padding-bottom: 20px;
 }
 h2 {
   margin-top: 15px;
