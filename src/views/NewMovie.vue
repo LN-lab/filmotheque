@@ -9,9 +9,10 @@
         </ul>
         </p>
           <Form @form-submitted="checkForm">
- 
+      
           </Form>
         </div>
+        <HomeButton/>
       </template>
  </Layout>
 </template>
@@ -20,10 +21,12 @@
 import Layout from '../components/Layout'
 import Form from '../components/Form'
 import { mapActions } from 'vuex'
+import HomeButton from "../components/HomeButton.vue"
 
 export default {
   name:'NewMovie',
-  components: { Layout, Form },
+  components: { Layout, Form, HomeButton
+  },
   data () {
     return{
       errors : [],
@@ -51,7 +54,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 
-
+#form-image{
+  border:red;
+}
 </style>

@@ -26,9 +26,9 @@
           @input="getMovieDataFromInput($event, 'image')"
           
         />
-    
+    <div v-if="imageValue.length !=0">
         <img  class=image :src="imageValue" alt="image du film" />
-
+    </div>
       </div>
     </div>
     

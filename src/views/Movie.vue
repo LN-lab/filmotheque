@@ -17,8 +17,9 @@
       @form-submitted="checkForm"
     ></Form>
     </div>
-
+<HomeButton/>
    </template>
+
   </Layout>
 </template>
 
@@ -26,6 +27,7 @@
 import Form from "../components/Form.vue";
 import { mapActions, mapGetters } from "vuex";
 import Layout from "../components/Layout.vue";
+import HomeButton from "../components/HomeButton.vue";
 
 export default {
   name: "Movie",
@@ -36,7 +38,7 @@ export default {
     };
   },
 
-  components: { Layout, Form },
+  components: { Layout, Form, HomeButton },
 
   computed: {
     ...mapGetters(["getMovies", "getMovieById"]),

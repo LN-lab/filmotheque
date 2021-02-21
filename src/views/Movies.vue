@@ -1,6 +1,6 @@
 <template>
   <div id="movies">
-    <Layout title="Mes films">
+    <Layout title="Filmothèque">
       <template #content>
         <div class="nav">
           <div class="search">
